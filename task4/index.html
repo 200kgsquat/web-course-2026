@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторная №4 — Быки и коровы</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <section class="card">
+      <header>
+        <p class="eyebrow">Лабораторная работа №4</p>
+        <h1>Быки и коровы</h1>
+        <p class="subtitle">Угадайте последовательность из 4 неповторяющихся цифр.</p>
+      </header>
+
+      <div class="rules">
+        <p><strong>Бык</strong> — цифра и позиция совпали.</p>
+        <p><strong>Корова</strong> — цифра есть, но стоит в другом месте.</p>
+      </div>
+
+      <form id="guess-form" class="guess-form" novalidate>
+        <label for="guess-input">Ваш вариант</label>
+        <div class="guess-row">
+          <input
+            id="guess-input"
+            type="text"
+            inputmode="numeric"
+            maxlength="4"
+            autocomplete="off"
+            placeholder="1234"
+            aria-describedby="error-message"
+          >
+          <button type="submit">Проверить</button>
+        </div>
+      </form>
+
+      <p class="message" id="error-message" aria-live="polite"></p>
+      <p class="status" id="status" aria-live="polite">Новая игра началась.</p>
+
+      <div class="game-info">
+        <span id="attempt-counter">Попыток: 0</span>
+        <button type="button" id="new-game-button">Новая игра</button>
+      </div>
+
+      <section class="history-block">
+        <h2>История попыток</h2>
+        <ol id="history-list" class="history-list"></ol>
+        <p id="history-empty" class="empty-state">Пока нет ни одной попытки.</p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
