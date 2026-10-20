@@ -1,0 +1,37 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> zen-money-express@1.0.0 test
+> node --test api.test.js
+
+GET /categories → 200 [{"id":1,"name":"Еда","type":"expense"},{"id":2,"name":"Транспорт","type":"expense"},{"id":3,"name":"Зарплата","type":"income"}]
+POST /categories → 201 {"id":4,"name":"Тест","type":"expense"}
+POST /transactions → 201 {"id":1,"amount":123.45,"category_id":4,"date":"2026-10-06","comment":"Создание","category_name":"Тест","type":"expense"}
+POST /transactions → 201 {"id":2,"amount":1000,"category_id":3,"date":"2026-09-01","comment":"","category_name":"Зарплата","type":"income"}
+GET /transactions → 200 [{"id":1,"amount":123.45,"category_id":4,"date":"2026-10-06","comment":"Создание","category_name":"Тест","type":"expense"},{"id":2,"amount":1000,"category_id":3,"date":"2026-09-01","comment":"","category_name":"Зарплата","type":"income"}]
+GET /transactions?type=expense&category_id=4&from=2026-10-01&to=2026-10-31 → 200 [{"id":1,"amount":123.45,"category_id":4,"date":"2026-10-06","comment":"Создание","category_name":"Тест","type":"expense"}]
+GET /transactions?type=income&from=2026-10-01 → 200 []
+PUT /transactions/1 → 200 {"id":1,"amount":200,"category_id":4,"date":"2026-10-07","comment":"Изменение","category_name":"Тест","type":"expense"}
+DELETE /transactions/1 → 204 null
+DELETE /transactions/2 → 204 null
+GET /transactions → 200 []
+✔ all required routes: CRUD and SQL filters (638.216977ms)
+POST /categories → 400 {"error":"Название категории: 1–80 символов"}
+POST /categories → 400 {"error":"Тип должен быть income или expense"}
+POST /transactions → 400 {"error":"Сумма должна быть числом больше 0 и не больше 1 трлн"}
+POST /transactions → 400 {"error":"Категория не существует"}
+POST /transactions → 400 {"error":"Нужна существующая дата в формате YYYY-MM-DD"}
+POST /transactions → 400 {"error":"Сумма должна быть числом больше 0 и не больше 1 трлн"}
+PUT /transactions/999999 → 404 {"error":"Операция не найдена"}
+DELETE /transactions/999999 → 404 {"error":"Операция не найдена"}
+GET /transactions/999999 → 404 {"error":"Операция не найдена"}
+GET /transactions?type=wrong → 400 {"error":"Некорректный тип"}
+GET /transactions?from=2026-12-01&to=2026-01-01 → 400 {"error":"Дата «от» должна быть не позже даты «до»"}
+✔ server validation and 404 (101.172501ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2410.127873

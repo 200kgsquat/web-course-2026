@@ -1,0 +1,10 @@
+const router = require('express').Router();
+const controller = require('../controllers/finance-controller');
+router.get('/categories', controller.getCategories);
+router.post('/categories', controller.createCategory);
+router.get('/transactions', controller.getTransactions);
+router.post('/transactions', controller.createTransaction);
+router.get('/transactions/:id', controller.getTransaction);
+router.put('/transactions/:id', controller.updateTransaction);
+router.delete('/transactions/:id', controller.deleteTransaction);
+module.exports = router;

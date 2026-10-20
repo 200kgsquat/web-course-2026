@@ -1,0 +1,12 @@
+const express = require('express');
+const cors = require('cors');
+const path = require('node:path');
+const app = express();
+app.use(cors());
+app.use(express.json({limit: '100kb'}));
+app.use(require('./routes/finance-routes'));
+app.use(express.static(path.join(__dirname, '../client')));
+app.use((req, res) => res.status(404).json({error: 'Роут не найден'}));
+app.use((error, req, res, next) => res.status(error.status === 400 ? 400 : 500).json({error: error.status === 400 ? 'Некорректный JSON' : 'Ошибка сервера'}));
+if (require.main === module) app.listen(3001, () => console.log('Zen-Money: http://localhost:3001'));
+module.exports = app;
