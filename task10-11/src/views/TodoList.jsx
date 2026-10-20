@@ -1,0 +1,1 @@
+import React from 'react';import TodoItem from './TodoItem.jsx';export default function TodoList({tasks,onToggle,onDelete}){return tasks.length?<ul className="list">{tasks.map(task=><TodoItem key={task.id} task={task} onToggle={onToggle} onDelete={onDelete}/>)}</ul>:<p className="empty">Нет задач в этом фильтре.</p>;}

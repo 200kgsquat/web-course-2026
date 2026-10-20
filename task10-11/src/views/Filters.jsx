@@ -1,0 +1,1 @@
+import React from 'react';export default function Filters({value,onChange}){return <nav className="filters">{[['all','Все'],['active','Активные'],['completed','Завершённые']].map(([id,label])=><button key={id} aria-pressed={value===id} onClick={()=>onChange(id)}>{label}</button>)}</nav>;}
