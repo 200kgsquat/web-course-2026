@@ -1,0 +1,21 @@
+✔ dry run changes nothing, including metadata and backup directories (563.304283ms)
+✔ adds only 6–16, preserves roots, old labs and git metadata (594.34742ms)
+✔ repeated installation is idempotent (1633.534438ms)
+✔ conflicting file aborts the entire plan before creating files (741.574755ms)
+✔ force backs up differing files and preserves unlisted user files (552.233554ms)
+✔ nested padded lab layout rewrites imports and links (503.579735ms)
+✔ ambiguous layouts stop with no writes (200.206626ms)
+✔ explicit directory and prefix resolve ambiguity (602.580125ms)
+✔ symlink leading to an old lab is refused without mutation (534.32121ms)
+✔ numeric layout is supported (1092.070147ms)
+✔ missing Git root and unknown flags fail without writes (514.249652ms)
+✔ explicit parent cannot write inside Git metadata or old labs (707.394482ms)
+✔ force replacement does not modify an old lab through a hard link (533.633266ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9253.185788

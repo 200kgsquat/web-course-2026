@@ -1,0 +1,20 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> course-tests@1.0.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /workspace/scratch/251d63ace5d8/supplement-build/installed/web-course-2026/task14
+
+ ✓ tests/mvc.test.js (4 tests) 43ms
+ ✓ tests/logic.test.js (10 tests) 142ms
+ ✓ tests/components.test.js (7 tests) 3272ms
+   ✓ TodoForm renders input and add button  1649ms
+   ✓ TodoItem deletes the right id  413ms
+   ✓ App adds, completes, filters, persists and deletes  967ms
+
+ Test Files  3 passed (3)
+      Tests  21 passed (21)
+   Start at  07:05:14
+   Duration  19.11s (transform 3.57s, setup 11.30s, collect 4.39s, tests 3.46s, environment 6.84s, prepare 1.55s)
+

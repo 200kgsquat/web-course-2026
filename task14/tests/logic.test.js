@@ -1,0 +1,13 @@
+import {it,expect} from 'vitest';
+import {visibleTasks,createTask,toggleTask,deleteTask,taskStats,loadTasks,saveTasks} from '../../task10-11/src/models/todo-model.js';
+const tasks=[{id:'a',text:'Яблоко',completed:false,createdAt:2},{id:'b',text:'Арбуз',completed:true,createdAt:1}];
+it('all filter preserves both tasks',()=>expect(visibleTasks(tasks,'all','oldest')).toHaveLength(2));
+it('active filter excludes completed tasks',()=>expect(visibleTasks(tasks,'active','oldest').map(t=>t.id)).toEqual(['a']));
+it('completed filter excludes active tasks',()=>expect(visibleTasks(tasks,'completed','oldest').map(t=>t.id)).toEqual(['b']));
+it('alphabetical sorting does not mutate input',()=>{const original=JSON.stringify(tasks);expect(visibleTasks(tasks,'all','alpha').map(t=>t.id)).toEqual(['b','a']);expect(JSON.stringify(tasks)).toBe(original);});
+it('date sorting supports both directions',()=>{expect(visibleTasks(tasks,'all','newest')[0].id).toBe('a');expect(visibleTasks(tasks,'all','oldest')[0].id).toBe('b');});
+it('empty list has zero statistics',()=>{expect(visibleTasks([],'all','alpha')).toEqual([]);expect(taskStats([])).toEqual({completed:0,remaining:0});});
+it('task creation trims text and uses a unique id',()=>{const a=createTask(' A '),b=createTask('B');expect(a.text).toBe('A');expect(a.id).not.toBe(b.id);expect(a.completed).toBe(false);});
+it('toggle and deletion use ids without mutation',()=>{const changed=toggleTask(tasks,'a');expect(changed[0].completed).toBe(true);expect(tasks[0].completed).toBe(false);expect(deleteTask(tasks,'a').map(t=>t.id)).toEqual(['b']);});
+it('storage restores tasks and recovers from malformed JSON',()=>{saveTasks(tasks);expect(loadTasks()).toEqual(tasks);localStorage.setItem('react-todos','{');expect(loadTasks()).toEqual([]);});
+it('invalid argument is rejected instead of silently producing data',()=>expect(()=>visibleTasks(null,'all','alpha')).toThrow());
